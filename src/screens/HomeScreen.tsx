@@ -14,7 +14,7 @@ import {
   Paragraph,
 } from 'react-native-paper';
 import { useQuery } from '@tanstack/react-query';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, UrlTile } from 'react-native-maps';
 
 import StationCard from '../components/StationCard';
 import FilterModal from '../components/FilterModal';
@@ -118,7 +118,6 @@ const HomeScreen: React.FC = () => {
 
       {showMap && currentLocation ? (
         <MapView
-          provider={PROVIDER_GOOGLE}
           style={styles.map}
           initialRegion={{
             latitude: currentLocation.latitude,
@@ -129,15 +128,20 @@ const HomeScreen: React.FC = () => {
           showsUserLocation={true}
           showsMyLocationButton={true}
         >
+          <UrlTile
+            urlTemplate="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            maximumZ={19}
+            flipY={false}
+          />
           {filteredStations.map(station => (
             <Marker
-              key={station.id}
+              key={station.osmId.toString()}
               coordinate={{
                 latitude: station.latitude,
                 longitude: station.longitude,
               }}
               title={station.name}
-              description={`Petrol: N${station.petrolPrice.toFixed(2)} | Diesel: N${station.dieselPrice.toFixed(2)}`}
+              description={station.brand}
             />
           ))}
         </MapView>
@@ -148,7 +152,7 @@ const HomeScreen: React.FC = () => {
           ) : (
             <FlatList
               data={filteredStations}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item) => item.osmId.toString()}
               renderItem={({ item }) => (
                 <StationCard
                   station={item}
