@@ -22,8 +22,9 @@ import PriceUpdateModal from '../components/PriceUpdateModal';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ApiService from '../services/ApiService';
 import LocationService from '../services/LocationService';
-import { FuelStation, SearchFilters, Location } from '../types';
+import { FuelStation, SearchFilters } from '../types';
 import { DEFAULT_FILTERS } from '../utils/constants';
+import { LocationObjectCoords } from 'expo-location';
 
 const HomeScreen: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,7 +32,7 @@ const HomeScreen: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showPriceUpdate, setShowPriceUpdate] = useState(false);
   const [selectedStation, setSelectedStation] = useState<FuelStation | null>(null);
-  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<LocationObjectCoords | null>(null);
   const [snackbarVisible, setSnackbarVisible] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [fabOpen, setFabOpen] = useState(false);
@@ -45,8 +46,8 @@ const HomeScreen: React.FC = () => {
 
   const initializeLocation = async () => {
     try {
-      const location = await LocationService.getCurrentLocation();
-      setCurrentLocation(location);
+      const coords = await LocationService.getCurrentLocation();
+      setCurrentLocation(coords);
     } catch (error) {
       console.error('Location error:', error);
       Alert.alert(
