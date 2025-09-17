@@ -11,7 +11,7 @@ Fuel Finder Namibia is a mobile application designed to help users in Namibia fi
 
 ## Technology Stack
 
-- **Frontend:** React Native
+- **Frontend:** React Native (with Expo)
 - **Backend:** Node.js with Express
 - **Mapping Data:** OpenStreetMap (via Overpass API)
 - **Map Display:** `react-native-maps` with an OpenStreetMap tile layer
@@ -23,7 +23,6 @@ To run this application, you need to set up both the frontend and the backend.
 ### Prerequisites
 
 - Node.js and npm
-- A React Native development environment (see the [official React Native documentation](https://reactnative.dev/docs/environment-setup))
 - An Android Emulator or a physical device
 
 ### 1. Backend Setup
@@ -63,16 +62,21 @@ The server will start, typically on `http://localhost:3000`.
 
 ### 2. Start the Frontend Application
 
-In a **new** terminal window, from the project root directory, run the application on your desired platform:
+In a **new** terminal window, from the project root directory, run the application on your desired platform. This will start the Expo development server and build the app.
 
 **For Android:**
 ```bash
-npx react-native run-android
+npm run android
 ```
 
 **For iOS:**
 ```bash
-npx react-native run-ios
+npm run ios
+```
+
+Alternatively, you can start the development server first and then select the platform from the menu that appears in the terminal.
+```bash
+npm start
 ```
 
 The application will build and launch on your emulator or connected device.

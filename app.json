@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "FuelFinderNamibia",
+    "slug": "FuelFinderNamibia",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "android": {
+      "package": "com.fuelfindernamibia"
+    },
+    "ios": {
+      "bundleIdentifier": "com.fuelfindernamibia"
+    }
+  }
+}
